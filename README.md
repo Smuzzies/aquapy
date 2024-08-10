@@ -37,7 +37,7 @@ pip install pygame
 
 ## Preview
 
-![Aqua Preview](https://github.com/user-attachments/assets/554b2b63-3725-4042-8ebc-062416cb40ef)
+![image](https://github.com/user-attachments/assets/398c1872-a2a8-4a8b-8aa1-cd9fc681c524)
 ![image](https://github.com/user-attachments/assets/7de7c8f9-1ab6-4631-adb2-1a3c1a885ec7)
 
 
