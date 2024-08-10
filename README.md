@@ -2,6 +2,8 @@
 
 A fishtank inspired by [@oric_rax](https://x.com/oric_rax).
 
+##TODO: Add support to auto generate FLUXAI Comfy-backend for custom backgrounds.
+
 ---
 
 ## Instructions
