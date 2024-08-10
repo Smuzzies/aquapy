@@ -1,17 +1,46 @@
 # AquaPY
-Fishtank inspired by @oric_rax
 
-Instructions:
+A fishtank inspired by [@oric_rax](https://github.com/oric_rax).
 
-Clone this git and run with "python aqua.py".
-Or download aqua.py and aqua.mp3 and execute "python aqua.py" from commandline.
+---
 
-Requirements:
-Python Module - pygame
+## Instructions
 
-To install modules, run "pip install (modulename)" from commandline.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/aquapy.git
+   cd aquapy
+   ```
 
-![image](https://github.com/user-attachments/assets/554b2b63-3725-4042-8ebc-062416cb40ef)
+2. **Run the application**:
+   ```bash
+   python aqua.py
+   ```
 
-<video src="https://github.com/Smuzzies/aquapy/blob/main/aqua.mov" controls="controls" style="max-width: 100%; height: auto;">
-</video>
+   Alternatively, you can download `aqua.py` and `aqua.mp3`, then execute:
+   ```bash
+   python aqua.py
+   ```
+
+---
+
+## Requirements
+
+- **Python Module**: `pygame`
+
+To install the required modules, run:
+```bash
+pip install pygame
+```
+
+---
+
+## Preview
+
+![Aqua Preview](https://github.com/user-attachments/assets/554b2b63-3725-4042-8ebc-062416cb40ef)
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
