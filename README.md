@@ -1,6 +1,6 @@
 # AquaPY
 
-A fishtank inspired by [@oric_rax](https://github.com/oric_rax).
+A fishtank inspired by [@oric_rax](https://x.com/oric_rax).
 
 ---
 
