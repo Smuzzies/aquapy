@@ -17,10 +17,9 @@ A fishtank inspired by [@oric_rax](https://x.com/oric_rax).
    python aqua.py
    ```
 
-   You can change the background of your tank by editing the following line:
+   Change the background of your tank by editing the following line:
    ```bash
    self.background = self.load_background("https://example.com/background.jpg", 0.1)
-   Example https://images.unsplash.com/photo-1560364897-91578ff41817?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
    ```
 
 ---
