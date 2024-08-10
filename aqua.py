@@ -84,7 +84,7 @@ class Fish(AquariumObject):
         char = random.choice(FISH_RIGHT if self.direction == 1 else FISH_LEFT)
         super().__init__(x, y, char)
         self.color = self.random_bright_color()
-        self.speed = random.uniform(0.03, 0.2)  # Random speed for each fish
+        self.speed = random.uniform(0.01, 0.1)  # Random speed for each fish
 
     def random_bright_color(self):
         # Generate a random bright color
@@ -131,7 +131,7 @@ class Fish(AquariumObject):
 class Bubble(AquariumObject):
     def __init__(self, x, y):
         super().__init__(x, y, random.choice(BUBBLES))
-        self.speed = random.uniform(0.1, 0.3)  # Varying speeds for bubbles
+        self.speed = random.uniform(0.025, 0.1)  # Varying speeds for bubbles
 
     def move(self):
         self.y -= self.speed
@@ -147,7 +147,7 @@ class Seaweed(AquariumObject):
         self.sway_direction = random.choice([-1, 1])
 
     def move(self):
-        self.sway_offset += 0.02 * self.sway_direction  # Slower swaying
+        self.sway_offset += 0.01 * self.sway_direction  # Slower swaying
         if abs(self.sway_offset) > 1:
             self.sway_direction *= -1
 
@@ -180,10 +180,10 @@ class Aquarium:
         self.objects = []
         self.add_fish(25)
         self.add_bubbles(80)
-        self.add_seaweed(40)  # Increased number of seaweed
+        self.add_seaweed(20)  # Increased number of seaweed
         self.add_castle()
         self.aquarium_surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
-        self.background = self.load_background("https://plus.unsplash.com/premium_photo-1668324814994-2863e908635d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 0.1)
+        self.background = self.load_background("https://images.unsplash.com/photo-1529255484355-cb73c33c04bb?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 0.2)
 
     def load_background(self, url, opacity):
         try:
@@ -268,7 +268,7 @@ def main():
         aquarium.draw(screen, offset_x, offset_y)
         close_button.draw(screen)
         pygame.display.flip()
-        clock.tick(30)  # 30 FPS for smooth animation
+        clock.tick(60)  # 30 FPS for smooth animation
 
 if __name__ == "__main__":
     main()
