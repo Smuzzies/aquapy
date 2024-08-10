@@ -13,5 +13,5 @@ To install modules, run "pip install (modulename)" from commandline.
 
 ![image](https://github.com/user-attachments/assets/554b2b63-3725-4042-8ebc-062416cb40ef)
 
-<video src="https://user-images.githubusercontent.com/your-username/your-repo/aqua.mov" controls="controls" style="max-width: 100%; height: auto;">
+<video src="aqua.mov" controls="controls" style="max-width: 100%; height: auto;">
 </video>
