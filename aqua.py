@@ -25,10 +25,10 @@ DARK_GRAY = (20, 20, 20)  # Very dark gray for background
 LIGHT_GRAY = (100, 100, 100)  # Light gray for the title bar
 
 # Define ASCII characters for different elements
-FISH_RIGHT = ['><>', '><))>', '><)))o', '>##*)', '>==>', '>-=:>', '>|||>', '><(((*>']
-FISH_LEFT = ['<><', '<))><', 'o(((><', '(*##<', '<==<', '<:=-<', '<|||<', '<*)))><']
+FISH_RIGHT = ['><>', '><))>', '><)))°)', '>##°)', '>=°>', '>-=°>', '>|||°>', '><(((*>']
+FISH_LEFT = ['<><', '<))><', '(°(((><', '(°##<', '<°=<', '<°=-<', '<°|||<', '<*)))><']
 BUBBLES = ['o', 'O', '°', '.']
-SEAWEED = ['((', '))', '&']
+SEAWEED = ['((', '))', '&', '@']
 CASTLE = [
     '                                  i~~~',
     '                                 / \\',
@@ -84,7 +84,7 @@ class Fish(AquariumObject):
         char = random.choice(FISH_RIGHT if self.direction == 1 else FISH_LEFT)
         super().__init__(x, y, char)
         self.color = self.random_bright_color()
-        self.speed = random.uniform(0.02, 0.2)  # Random speed for each fish
+        self.speed = random.uniform(0.03, 0.2)  # Random speed for each fish
 
     def random_bright_color(self):
         # Generate a random bright color
@@ -142,7 +142,7 @@ class Bubble(AquariumObject):
 class Seaweed(AquariumObject):
     def __init__(self, x):
         super().__init__(x, HEIGHT // 20 - 1, random.choice(SEAWEED))
-        self.height = random.randint(5, 17)  # Increased height range
+        self.height = random.randint(3, 20)  # Increased height range
         self.sway_offset = 0
         self.sway_direction = random.choice([-1, 1])
 
@@ -180,7 +180,7 @@ class Aquarium:
         self.objects = []
         self.add_fish(25)
         self.add_bubbles(80)
-        self.add_seaweed(20)  # Increased number of seaweed
+        self.add_seaweed(40)  # Increased number of seaweed
         self.add_castle()
         self.aquarium_surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
         self.background = self.load_background("https://plus.unsplash.com/premium_photo-1668324814994-2863e908635d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 0.1)
