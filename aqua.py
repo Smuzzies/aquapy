@@ -23,8 +23,8 @@ DARK_GRAY = (20, 20, 20)  # Very dark gray for background
 LIGHT_GRAY = (100, 100, 100)  # Light gray for the title bar
 
 # Define ASCII characters for different elements
-FISH_RIGHT = ['><>', '><))>', '><)))o', '>-->', '>==>', '>-=>']
-FISH_LEFT = ['<><', '<))><', 'o(((><', '<--<', '<==<', '<=--<']
+FISH_RIGHT = ['><>', '><))>', '><)))o', '>=~~~)', '>==>', '>-=>', '>|||>', '><(((*>']
+FISH_LEFT = ['<><', '<))><', 'o(((><', '(~~~=<', '<==<', '<=-<', '<|||<', '<*)))><']
 BUBBLES = ['o', 'O', '°', '.']
 SEAWEED = ['((', '))', '~']
 CASTLE = [
