@@ -177,7 +177,7 @@ class CloseButton:
         
     def draw(self, surface):
         pygame.draw.rect(surface, LIGHT_GRAY, self.rect)
-        close_text = self.font.render('X', True, WHITE)
+        close_text = self.font.render('x', True, WHITE)
         surface.blit(close_text, (self.rect.x + 10, self.rect.y + 5))
 
     def handle_event(self, event):
@@ -190,11 +190,11 @@ class Aquarium:
     def __init__(self):
         self.objects = []
         self.add_fish(25)
-        self.add_bubbles(80)
-        self.add_seaweed(20)  # Increased number of seaweed
+        self.add_bubbles(180)
+        self.add_seaweed(40)  # Increased number of seaweed
         self.add_castle()
         self.aquarium_surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
-        self.background = self.load_background("https://images.unsplash.com/photo-1529255484355-cb73c33c04bb?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 0.2)
+        self.background = self.load_background("https://images.unsplash.com/photo-1465634836201-1d5651b9b6d6?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 0.2)
 
     def load_background(self, url, opacity):
         try:
