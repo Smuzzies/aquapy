@@ -20,9 +20,35 @@ if os.name == 'nt':
 # Define colors
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
-FISH_COLORS = [(255, 0, 0), (255, 255, 0), (0, 0, 255), (255, 0, 255), (0, 255, 255)]
 DARK_GRAY = (20, 20, 20)  # Very dark gray for background
-LIGHT_GRAY = (100, 100, 100)  # Light gray for the title bar
+LIGHT_GRAY = (40, 40, 40)  # Light gray for the title bar
+PALETTES = {
+    'ocean': [(0, 119, 190), (0, 180, 216), (144, 224, 239), (202, 240, 248)],
+    'coral': [(255, 190, 152), (255, 166, 158), (255, 138, 138), (255, 102, 99)],
+    'tropical': [(255, 209, 102), (255, 140, 102), (255, 98, 98), (255, 69, 69)],
+    'deep_sea': [(4, 41, 58), (6, 70, 99), (8, 100, 139), (11, 131, 180)],
+    'pastel': [(255, 179, 186), (255, 223, 186), (255, 255, 186), (186, 255, 201)],
+    'neon': [(255, 16, 240), (0, 255, 255), (0, 255, 0), (255, 255, 0)],
+    'autumn': [(165, 42, 42), (204, 85, 0), (255, 140, 0), (255, 215, 0)],
+    'spring': [(0, 255, 127), (50, 205, 50), (154, 205, 50), (255, 215, 0)],
+    'monochrome': [(255, 255, 255), (200, 200, 200), (150, 150, 150), (100, 100, 100)],
+    'vibrant': [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0)],
+    # New palettes with pinks and purples
+    'berry': [(142, 68, 173), (155, 89, 182), (200, 102, 204), (231, 60, 192)],
+    'sunset': [(255, 107, 107), (255, 159, 67), (255, 205, 86), (250, 177, 160)],
+    'lavender': [(230, 230, 250), (216, 191, 216), (221, 160, 221), (238, 130, 238)],
+    'neon_nights': [(255, 0, 255), (0, 255, 255), (255, 0, 128), (128, 0, 255)],
+    'cotton_candy': [(255, 183, 213), (255, 219, 255), (189, 224, 254), (162, 210, 255)]
+}
+
+SEAWEED_COLORS = [
+    (0, 100, 0),    # Dark Green
+    (0, 128, 0),    # Green
+    (34, 139, 34),  # Forest Green
+    (0, 255, 0),    # Lime Green
+    (50, 205, 50),  # Lime
+    (144, 238, 144) # Light Green
+]
 
 # Define ASCII characters for different elements
 FISH_RIGHT = ['><>', '><))>', '><)))°)', '>##°)', '>=°>', '>-=°>', '>|||°>', '><(((*>']
@@ -83,50 +109,35 @@ class Fish(AquariumObject):
         self.direction = random.choice([-1, 1])
         char = random.choice(FISH_RIGHT if self.direction == 1 else FISH_LEFT)
         super().__init__(x, y, char)
-        self.color = self.random_bright_color()
+        self.color_mode = random.choice(['static', 'gradient', 'multi'])
+        self.palette = random.choice(list(PALETTES.values()))
+        self.colors = self.generate_colors()
         self.speed = random.uniform(0.01, 0.1)  # Random speed for each fish
 
-    def random_bright_color(self):
-        # Generate a random bright color
-        h = random.random()  # Random hue
-        s = 0.8 + random.random() * 0.2  # High saturation
-        v = 0.8 + random.random() * 0.2  # High value (brightness)
-        r, g, b = self.hsv_to_rgb(h, s, v)
-        return (int(r * 255), int(g * 255), int(b * 255))
-
-    def hsv_to_rgb(self, h, s, v):
-        if s == 0.0:
-            return v, v, v
-        i = int(h * 6.0)
-        f = (h * 6.0) - i
-        p = v * (1.0 - s)
-        q = v * (1.0 - s * f)
-        t = v * (1.0 - s * (1.0 - f))
-        i = i % 6
-        if i == 0:
-            return v, t, p
-        if i == 1:
-            return q, v, p
-        if i == 2:
-            return p, v, t
-        if i == 3:
-            return p, q, v
-        if i == 4:
-            return t, p, v
-        if i == 5:
-            return v, p, q
+    def generate_colors(self):
+        if self.color_mode == 'static':
+            return [random.choice(self.palette)] * len(self.char)
+        elif self.color_mode == 'gradient':
+            return [self.palette[i % len(self.palette)] for i in range(len(self.char))]
+        else:  # multi
+            return [random.choice(self.palette) for _ in range(len(self.char))]
 
     def move(self):
         self.x += self.direction * self.speed
         if self.x <= 0 or self.x >= WIDTH // 20 - len(self.char):
             self.direction *= -1
-            self.char = random.choice(FISH_RIGHT if self.direction == 1 else FISH_LEFT)
-            # Adjust position to prevent sticking at the edge
+            char = random.choice(FISH_RIGHT if self.direction == 1 else FISH_LEFT)
+            self.char = char
+            self.colors = self.generate_colors()  # Regenerate colors when changing direction
             self.x = max(0, min(self.x, WIDTH // 20 - len(self.char)))
 
     def draw(self, surface, offset_x, offset_y):
-        text = font.render(self.char, True, self.color)
-        surface.blit(text, ((self.x + offset_x) * 20, (self.y + offset_y) * 20))
+        x_pos = int((self.x + offset_x) * 20)
+        y_pos = int((self.y + offset_y) * 20)
+        for char, color in zip(self.char, self.colors):
+            text = font.render(char, True, color)
+            surface.blit(text, (x_pos, y_pos))
+            x_pos += text.get_width()
 
 class Bubble(AquariumObject):
     def __init__(self, x, y):
@@ -145,6 +156,7 @@ class Seaweed(AquariumObject):
         self.height = random.randint(3, 20)  # Increased height range
         self.sway_offset = 0
         self.sway_direction = random.choice([-1, 1])
+        self.color = random.choice(SEAWEED_COLORS)  # Randomly choose a green shade
 
     def move(self):
         self.sway_offset += 0.01 * self.sway_direction  # Slower swaying
@@ -153,8 +165,7 @@ class Seaweed(AquariumObject):
 
     def draw(self, surface, offset_x, offset_y):
         for i in range(self.height):
-            text = font.render(self.char, True, GREEN)
-            # Reverse the sway effect: multiply by i instead of (self.height - i)
+            text = font.render(self.char, True, self.color)
             x_pos = ((self.x + offset_x) * 20) + (self.sway_offset * i)
             y_pos = ((self.y - i) + offset_y) * 20
             surface.blit(text, (x_pos, y_pos))
