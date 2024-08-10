@@ -8,7 +8,7 @@ A fishtank inspired by [@oric_rax](https://x.com/oric_rax).
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/aquapy.git
+   git clone https://github.com/Smuzzies/aquapy.git
    cd aquapy
    ```
 
