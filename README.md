@@ -17,9 +17,9 @@ A fishtank inspired by [@oric_rax](https://x.com/oric_rax).
    python aqua.py
    ```
 
-   Alternatively, you can download `aqua.py` and `aqua.mp3`, then execute:
+   You can change the background of your tank by editing the following line:
    ```bash
-   python aqua.py
+   self.background = self.load_background("https://example.com/background.jpg", 0.1)
    ```
 
 ---
