@@ -1,10 +1,4 @@
-<table>
-  <tr>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/8ae84850-671a-4f01-be7d-0dd6661e725c" alt="image" style="max-width: 200px;">
-    </td>
-  </tr>
-</table>
+<img src="https://github.com/user-attachments/assets/8ae84850-671a-4f01-be7d-0dd6661e725c" width="512"/>
 
 A fishtank inspired by [@oric_rax](https://x.com/oric_rax).
 
