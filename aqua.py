@@ -2,6 +2,8 @@ import random
 import pygame
 import sys
 import os
+import requests
+from io import BytesIO
 
 # Initialize Pygame
 pygame.init()
@@ -180,6 +182,18 @@ class Aquarium:
         self.add_seaweed(20)  # Increased number of seaweed
         self.add_castle()
         self.aquarium_surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+        self.background = self.load_background("https://example.com/background.jpg", 0.1)
+
+    def load_background(self, url, opacity):
+        try:
+            response = requests.get(url)
+            image = pygame.image.load(BytesIO(response.content))
+            image = pygame.transform.scale(image, (WIDTH, HEIGHT))
+            image.set_alpha(int(255 * opacity))
+            return image
+        except:
+            print("Failed to load background image.")
+            return None
 
     def add_fish(self, count):
         for _ in range(count):
@@ -208,12 +222,13 @@ class Aquarium:
             obj.move()
 
     def draw(self, surface, offset_x, offset_y):
-        self.aquarium_surface.fill(DARK_GRAY)
+        if self.background:
+            surface.blit(self.background, (0, 0))
+        else:
+            surface.fill(DARK_GRAY)
         
         for obj in self.objects:
-            obj.draw(self.aquarium_surface, offset_x, offset_y)
-        
-        surface.blit(self.aquarium_surface, (0, 0))
+            obj.draw(surface, offset_x, offset_y)
 
 def main():
     aquarium = Aquarium()
