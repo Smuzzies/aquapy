@@ -25,10 +25,10 @@ DARK_GRAY = (20, 20, 20)  # Very dark gray for background
 LIGHT_GRAY = (100, 100, 100)  # Light gray for the title bar
 
 # Define ASCII characters for different elements
-FISH_RIGHT = ['><>', '><))>', '><)))o', '>=~~~)', '>==>', '>-=>', '>|||>', '><(((*>']
-FISH_LEFT = ['<><', '<))><', 'o(((><', '(~~~=<', '<==<', '<=-<', '<|||<', '<*)))><']
+FISH_RIGHT = ['><>', '><))>', '><)))o', '>##*)', '>==>', '>-=:>', '>|||>', '><(((*>']
+FISH_LEFT = ['<><', '<))><', 'o(((><', '(*##<', '<==<', '<:=-<', '<|||<', '<*)))><']
 BUBBLES = ['o', 'O', '°', '.']
-SEAWEED = ['((', '))', '~']
+SEAWEED = ['((', '))', '&']
 CASTLE = [
     '                                  i~~~',
     '                                 / \\',
@@ -37,15 +37,15 @@ CASTLE = [
     '    inspired by @oric_rax    _ _|_o_|_ _',
     '                             ]=I=I=I=I=[',
     '       Y Y Y Y Y Y Y Y        \\-|-|-|-/',
-    '       ]=I=I=I=I=I=I=[   |  <===========> Y Y Y Y Y Y Y',
-    '        \\-\\--|-|--/-/  |  || []   [] |  ]=I=I=I=I=I=[',
-    '         | ~    #  | _ _ |_ ||_ _ _ _ _|_ _\\--|-|-|--/',
+    '       ]=I=I=I=I=I=I=[   |  <===========>  Y Y Y Y Y Y Y',
+    '        \\-\\--|-|--/-/    |  || []   [] |   ]=I=I=I=I=I=[',
+    '         | ~    #  | _ _ |_ ||_ _ _ _ _|_ _ \\--|-|-|--/',
     '         |    -    |=I=I=I=I=I=I=I=I=I=I=I=I=|       |',
     '         |         |-=-=-=-=-=-=-=-=-=-=-=-=-| #   []|',
     '         |  #   [] |          ___            |       |',
-    '         |         |    #   /   \\  #   #    |   #   |',
+    '         |         |    #    /   \\  #   #    |   #   |',
     '         |    #  - |  #    #|  ^  |    #     |  -  # |',
-    '       _/|         |\\_  #  |     |      # _/|       |\\_'
+    '       _/|         |\\_   #  |     |      # _/|       |\\_'
 ]
 
 # Set up the display
@@ -84,6 +84,7 @@ class Fish(AquariumObject):
         char = random.choice(FISH_RIGHT if self.direction == 1 else FISH_LEFT)
         super().__init__(x, y, char)
         self.color = self.random_bright_color()
+        self.speed = random.uniform(0.02, 0.2)  # Random speed for each fish
 
     def random_bright_color(self):
         # Generate a random bright color
@@ -116,7 +117,7 @@ class Fish(AquariumObject):
             return v, p, q
 
     def move(self):
-        self.x += self.direction * 0.2  # Even slower movement
+        self.x += self.direction * self.speed
         if self.x <= 0 or self.x >= WIDTH // 20 - len(self.char):
             self.direction *= -1
             self.char = random.choice(FISH_RIGHT if self.direction == 1 else FISH_LEFT)
@@ -146,7 +147,7 @@ class Seaweed(AquariumObject):
         self.sway_direction = random.choice([-1, 1])
 
     def move(self):
-        self.sway_offset += 0.05 * self.sway_direction  # Slower swaying
+        self.sway_offset += 0.02 * self.sway_direction  # Slower swaying
         if abs(self.sway_offset) > 1:
             self.sway_direction *= -1
 
@@ -182,7 +183,7 @@ class Aquarium:
         self.add_seaweed(20)  # Increased number of seaweed
         self.add_castle()
         self.aquarium_surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
-        self.background = self.load_background("https://example.com/background.jpg", 0.1)
+        self.background = self.load_background("https://plus.unsplash.com/premium_photo-1668324814994-2863e908635d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 0.1)
 
     def load_background(self, url, opacity):
         try:
